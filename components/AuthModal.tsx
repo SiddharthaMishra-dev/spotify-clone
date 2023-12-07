@@ -25,7 +25,7 @@ const AuthModal = () => {
       router.refresh();
       onClose();
     }
-  });
+  }, [session, router]);
   return (
     <Modal
       title="Welcome back"
