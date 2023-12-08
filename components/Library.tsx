@@ -3,8 +3,20 @@ import React from "react";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
 
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
+import useUploadModal from "@/hooks/useUploadModal";
+
 const Library = () => {
-  const onClick = () => {};
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+  const { user } = useUser();
+  const onClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
+    return uploadModal.onOpen();
+  };
 
   return (
     <div
@@ -14,7 +26,10 @@ const Library = () => {
     >
       <div className="flex items-center justify-between px-5 pt-4">
         <div className="inline-flex items-center gap-x-2">
-          <TbPlaylist size={26} className="text-neutral-400" />
+          <TbPlaylist
+            size={26}
+            className="text-neutral-400"
+          />
           <p className="text-neutral-400 font-medium text-md">Your Library</p>
         </div>
         <AiOutlinePlus
