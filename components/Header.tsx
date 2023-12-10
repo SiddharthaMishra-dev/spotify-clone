@@ -38,7 +38,7 @@ const Header = ({ children, className }: HeaderProps) => {
     }
   };
   return (
-    <div className={twMerge(`h-fit bg-gradient-to-b from-emerald-800 p-6`)}>
+    <div className={twMerge(`h-fit bg-gradient-to-b from-emerald-800 p-6`, className)}>
       <div className="w-full flex justify-between items-center mb-4">
         <div className="hidden md:flex gap-x-2 items-center">
           <button
