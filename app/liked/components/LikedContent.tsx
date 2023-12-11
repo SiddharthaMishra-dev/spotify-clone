@@ -2,20 +2,34 @@
 
 import LikeButton from "@/components/LikeButton";
 import MediaItem from "@/components/MediaItem";
+import { useUser } from "@/hooks/useUser";
 import { Song } from "@/types";
 
-interface SearchContentProps {
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+interface LikedContentProps {
   songs: Song[];
 }
 
-const SearchContent = ({ songs }: SearchContentProps) => {
+const LikedContent = ({ songs }: LikedContentProps) => {
+  const router = useRouter();
+  const { isLoading, user } = useUser();
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.replace("/");
+    }
+  }, [isLoading, user, router]);
+
   if (songs.length === 0) {
     return (
-      <div className="flex flex-col gap-y-2 text-neutral-400 w-full px-6">No songs found.</div>
+      <div className="flex flex-col text-neutral-400 w-full px-6 gap-y-2">No liked songs.</div>
     );
   }
+
   return (
-    <div className="flex flex-col gap-y-2 w-full px-6">
+    <div className="p-6 flex flex-col gap-y-2 w-full">
       {songs.map((song) => (
         <div
           key={song.id}
@@ -34,4 +48,4 @@ const SearchContent = ({ songs }: SearchContentProps) => {
   );
 };
 
-export default SearchContent;
+export default LikedContent;
