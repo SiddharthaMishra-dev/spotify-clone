@@ -21,6 +21,7 @@ const MediaItem = ({ data, onClick }: MediaItemProps) => {
   };
   return (
     <div
+      onClick={handleClick}
       className="
         flex
         items-center
