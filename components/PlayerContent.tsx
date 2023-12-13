@@ -5,6 +5,7 @@ import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerXMark, HiSpeakerWave } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import useSound from "use-sound";
+// import { Howl } from "howler";
 
 import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
@@ -64,6 +65,7 @@ const PlayerContent = ({ song, songUrl }: PlayerContentProps) => {
 
   useEffect(() => {
     sound?.play();
+
     return () => {
       sound?.unload();
     };
