@@ -8,6 +8,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import uniqid from "uniqid";
+import * as mm from "music-metadata-browser";
 
 import Modal from "./Modal";
 import Input from "./Input";
@@ -38,10 +39,12 @@ const UploadModal = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-    //
+    const songFile = values.song?.[0];
+    const metadata = await mm.parseBlob(songFile);
     setIsLoading(true);
     try {
-      const imageFile = values.image?.[0];
+      const imageBuffer = metadata?.common?.picture![0]?.data;
+      const imageFile = new Blob([imageBuffer], { type: "image/jpeg" });
       const songFile = values.song?.[0];
 
       if (!songFile || !imageFile || !user) {
@@ -134,7 +137,7 @@ const UploadModal = () => {
             {...register("song", { required: true })}
           />
         </div>
-        <div>
+        {/* <div>
           <div className="pb-1">Select an image file</div>
           <Input
             id="image"
@@ -143,7 +146,7 @@ const UploadModal = () => {
             disabled={isLoading}
             {...register("image", { required: true })}
           />
-        </div>
+        </div> */}
         <Button
           disabled={isLoading}
           type="submit"

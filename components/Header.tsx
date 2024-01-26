@@ -47,7 +47,7 @@ const Header = ({ children, className }: HeaderProps) => {
           >
             <RxCaretLeft
               className="text-white"
-              size={35}
+              size={35} 
             />
           </button>
           <button
