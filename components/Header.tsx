@@ -12,6 +12,7 @@ import Button from "./Button";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import { FaUserAlt } from "react-icons/fa";
+import Link from "next/link";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -47,7 +48,7 @@ const Header = ({ children, className }: HeaderProps) => {
           >
             <RxCaretLeft
               className="text-white"
-              size={35} 
+              size={35}
             />
           </button>
           <button
@@ -62,16 +63,20 @@ const Header = ({ children, className }: HeaderProps) => {
         </div>
         <div className="flex md:hidden gap-x-2 items-center">
           <button className="p-2 bg-white rounded-full flex items-center justify-center hover:opacity-75 transition">
-            <HiHome
-              size={20}
-              className="text-black"
-            />
+            <Link href="/">
+              <HiHome
+                size={20}
+                className="text-black"
+              />
+            </Link>
           </button>
           <button className="p-2 bg-white rounded-full flex items-center justify-center hover:opacity-75 transition">
-            <BiSearch
-              size={20}
-              className="text-black"
-            />
+            <Link href="/search">
+              <BiSearch
+                size={20}
+                className="text-black"
+              />
+            </Link>
           </button>
         </div>
         <div className="flex justify-between items-center gap-x-4">
